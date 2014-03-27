@@ -149,6 +149,7 @@ var commands = []*Command{
 	cmdPgUnfollow,
 	cmdPsql,
 	cmdRegions,
+	cmdSSLEndpoint,
 	cmdStatus,
 	cmdTransfer,
 	cmdTransfers,
