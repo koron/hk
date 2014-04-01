@@ -169,6 +169,11 @@
               "comment": "list addon services (extra)"
             },
             {
+              "root": "addon-update",
+              "arguments": "[-a <app>] <name> <plan>",
+              "comment": "update an addon's plan (extra)"
+            },
+            {
               "root": "addons",
               "arguments": "[-a <app>] [<service>:<plan>...]",
               "comment": "list addons"
@@ -365,7 +370,7 @@
             },
             {
               "root": "run",
-              "arguments": "[-a <app>] [-s <size>] [-d] <command> [<argument>...]",
+              "arguments": "[-s <size>] [-d] <command> [<argument>...]",
               "comment": "run a process in a dyno"
             },
             {

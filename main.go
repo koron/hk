@@ -124,6 +124,7 @@ var commands = []*Command{
 	cmdAddonOpen,
 	cmdAddonPlans,
 	cmdAddonServices,
+	cmdAddonUpdate,
 	cmdAPI,
 	cmdCreds,
 	cmdDrains,

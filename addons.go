@@ -234,6 +234,43 @@ func runAddonOpen(cmd *Command, args []string) {
 	must(openURL("https://addons-sso.heroku.com/apps/" + appname + "/addons/" + a.Plan.Name))
 }
 
+var cmdAddonUpdate = &Command{
+	Run:      runAddonUpdate,
+	Usage:    "addon-update <name> <plan>",
+	NeedsApp: true,
+	Category: "add-on",
+	Short:    "update an addon's plan" + extra,
+	Long: `
+Update (upgrade or downgrade) an addon's plan.
+
+Examples:
+
+    $ hk addon-update heroku-postgresql-blue standard-tengu
+
+    $ hk addon-update redistogo small
+`,
+}
+
+func runAddonUpdate(cmd *Command, args []string) {
+	appname := mustApp()
+	if len(args) != 2 {
+		cmd.printUsage()
+		os.Exit(2)
+	}
+	name := args[0]
+	plan := args[1]
+
+	addon, err := client.AddonInfo(appname, name)
+	checkAddonError(err)
+
+	// assemble service:plan string
+	serviceAndPlan := strings.Split(addon.Plan.Name, ":")[0] + ":" + plan
+
+	a, err := client.AddonUpdate(appname, name, serviceAndPlan)
+	checkAddonError(err)
+	log.Printf("Updated %s to %s on %s.", a.Name, plan, appname)
+}
+
 func checkAddonError(err error) {
 	if err != nil {
 		if hkerr, ok := err.(heroku.Error); ok && hkerr.Id == "not_found" {
