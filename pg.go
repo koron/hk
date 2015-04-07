@@ -334,7 +334,6 @@ func runPsql(cmd *Command, args []string) {
 
 	// construct and run psql command
 	psqlArgs := []string{
-		"psql",
 		"-U", u.User.Username(),
 		"-h", hostname,
 		"-p", strconv.Itoa(portnum),
